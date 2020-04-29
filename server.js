@@ -12,8 +12,8 @@ app.get('/',(req,res)=>{
 });
 app.post('/convert',(req,res)=>{
     var dataJson = JSON.parse(req.body.jsonTxt)
-    
-    res.send()
+    var convertData = convertToCSV(dataJson)
+    res.send(convertData)
 })
 
 
@@ -41,7 +41,7 @@ function extractValues(jsonObj, headObj, objvalArr=[]){
         for(let item of jsonObj){
             extractValues(item, headObj, objvalArr)
         }
-    }else{
+    }else {
         let valObj = Object.create(headObj)
         Object.keys(jsonObj).forEach(key=>{
             if(key!=="children"){
